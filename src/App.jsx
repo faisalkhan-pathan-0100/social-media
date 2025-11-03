@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Sidebar from "./components/Sidebar";
 import PostList from "./components/PostList";
 import CreatePost from "./components/CreatePost";
+import { PostListProvider } from "./store/post-list-store";
 
 function App() {
   const [selectTab, setSelectTab] = useState("View Post");
@@ -19,14 +20,16 @@ function App() {
     }
   };
   return (
-    <div className="app-container">
-      <Sidebar tabChange={selectTab} tabChange1={tabChange} />
-      <div className="content">
-        <Header />
-        {selectTab === "View Post" ? <PostList /> : <CreatePost />}
-        <Footer />
+    <PostListProvider>
+      <div className="app-container">
+        <Sidebar tabChange={selectTab} tabChange1={tabChange} />
+        <div className="content">
+          <Header />
+          {selectTab === "View Post" ? <PostList /> : <CreatePost />}
+          <Footer />
+        </div>
       </div>
-    </div>
+    </PostListProvider>
   );
 }
 
