@@ -11,14 +11,15 @@ export const PostListProvider = ({ children }) => {
     if (action.type === "CREATE_POST") {
       newPosts = [
         ...posts,
-        {
-          id: action.payload.id,
-          title: action.payload.title,
-          description: action.payload.description,
-          reaction: action.payload.reaction,
-          tags: action.payload.tags,
-          userId: action.payload.userId,
-        },
+        // {
+        //   id: action.payload.id,
+        //   title: action.payload.title,
+        //   description: action.payload.description,
+        //   reaction: action.payload.reaction,
+        //   tags: action.payload.tags,
+        //   userId: action.payload.userId,
+        // },
+        action.payload,
       ];
     } else if (action.type === "DELETE_POST") {
       newPosts = newPosts.filter((post) => post.id !== action.payload.id);
@@ -69,7 +70,7 @@ export const PostListProvider = ({ children }) => {
         title: postTitle,
         description: postDescription,
         reaction: postReaction,
-        tags: postTags,
+        tags: postTags.split(" "),
         userId: userId,
       },
     };
