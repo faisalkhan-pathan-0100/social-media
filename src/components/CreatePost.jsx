@@ -5,7 +5,7 @@ const CreatePost = () => {
   const postContext = useContext(AllPostList);
 
   const [post, setPost] = useState({
-    id: 10,
+    id: new Date(),
     title: "",
     body: "",
     reaction: "",
@@ -14,14 +14,30 @@ const CreatePost = () => {
   });
   const postSubmitHandler = (e) => {
     e.preventDefault();
-    postContext.createNewPost(
-      post.id,
-      post.title,
-      post.body,
-      post.reaction,
-      post.tags,
-      post.userId
-    );
+    console.log(post + "in hadner");
+
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: post.id,
+        title: post.title,
+        body: post.body,
+        reaction: post.reaction,
+        tags: post.tags.split(" "),
+        userId: post.userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => postContext.createNewPost(post));
+    // setPost({
+    //   post.id : "",
+    //   post.title: "",
+    //   description: "",
+    //   reaction: "",
+    //   tags: [],
+    //   userId: "",
+    // });
   };
   return (
     <div className="m-3">
@@ -39,13 +55,13 @@ const CreatePost = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="body" className="form-label">
-            body
+          <label htmlFor="description" className="form-label">
+            Description
           </label>
           <input
             type="text"
             className="form-control"
-            id="body"
+            id="description"
             onChange={(e) => setPost({ ...post, body: e.target.value })}
           />
         </div>

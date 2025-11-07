@@ -50,24 +50,36 @@ export const PostListProvider = ({ children }) => {
   // ];
   const [posts, postDispatcher] = useReducer(postReducer, []);
 
-  const createPost = (
-    postId,
-    postTitle,
-    postbody,
-    postReaction,
-    postTags,
-    userId
-  ) => {
-    console.log(postId, postTitle, postbody, postReaction, postTags, userId);
+  // const createPost = (
+  //   postId,
+  //   postTitle,
+  //   postbody,
+  //   postReaction,
+  //   postTags,
+  //   userId
+  // ) => {
+  //   console.log(postId, postTitle, postbody, postReaction, postTags, userId);
+  //   const createPostAction = {
+  //     type: "CREATE_POST",
+  //     payload: {
+  //       id: postId,
+  //       title: postTitle,
+  //       body: postbody,
+  //       reaction: postReaction,
+  //       tags: postTags.split(" "),
+  //       userId: userId,
+  //     },
+  //   };
+  //   postDispatcher(createPostAction);
+  // };
+
+  const createPost = (post) => {
+    // console.log(postId, postTitle, postbody, postReaction, postTags, userId);
+    console.log(post);
     const createPostAction = {
       type: "CREATE_POST",
       payload: {
-        id: postId,
-        title: postTitle,
-        body: postbody,
-        reaction: postReaction,
-        tags: postTags.split(" "),
-        userId: userId,
+        post: post,
       },
     };
     postDispatcher(createPostAction);

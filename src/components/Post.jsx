@@ -5,7 +5,7 @@ import { AllPostList } from "../store/post-list-store";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 
 const Post = ({ post }) => {
-  // console.log(post);
+  console.log(post);
   const context = useContext(AllPostList);
   const [like, setLike] = useState(false);
   let [reaction, setReaction] = useState(post.reaction);
@@ -66,8 +66,10 @@ const Post = ({ post }) => {
             />
           )}
           {reaction} <br></br>
-          {post.tags.map((tag) => (
-            <span className="badge text-bg-primary tag p-2">{tag}</span>
+          {post.tags?.map((tag, index) => (
+            <span key={index} className="badge text-bg-primary">
+              {tag}
+            </span>
           ))}
         </span>
         <br></br>
