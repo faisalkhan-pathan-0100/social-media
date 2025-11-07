@@ -5,7 +5,7 @@ import { AllPostList } from "../store/post-list-store";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 
 const Post = ({ post }) => {
-  console.log(post);
+  // console.log(post);
   const context = useContext(AllPostList);
   const [like, setLike] = useState(false);
   let [reaction, setReaction] = useState(post.reaction);

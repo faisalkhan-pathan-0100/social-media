@@ -1,15 +1,17 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 export const AllPostList = createContext({
   posts: [],
   createNewPost: () => {},
   deletepost: () => {},
-  fetchAllPost: () => {},
+  // fetchAllPost: () => {},
+  fetching: false,
 });
 
 export const PostListProvider = ({ children }) => {
   const postReducer = (posts, action) => {
     let newPosts = posts;
     if (action.type === "CREATE_POST") {
+      // console.log("in reducer");
       newPosts = [
         ...posts,
         // {
@@ -30,6 +32,17 @@ export const PostListProvider = ({ children }) => {
     return newPosts;
   };
 
+  const [fetching, setFetching] = useState(false);
+
+  useEffect(() => {
+    setFetching(true);
+    fetch("https://dummyjson.com/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        createAllPost(data.posts);
+        setFetching(false);
+      });
+  }, []);
   // let DEFAULT_POST = [
   //   {
   //     id: 1,
@@ -74,8 +87,7 @@ export const PostListProvider = ({ children }) => {
   // };
 
   const createPost = (post) => {
-    // console.log(postId, postTitle, postbody, postReaction, postTags, userId);
-    console.log(post);
+    //  console.log("before reducer");
     const createPostAction = {
       type: "CREATE_POST",
       payload: {
@@ -112,7 +124,8 @@ export const PostListProvider = ({ children }) => {
         postList: posts,
         createNewPost: createPost,
         deletepost: deletePost,
-        fetchAllPost: createAllPost,
+        // fetchAllPost: createAllPost,
+        fetching: fetching,
       }}
     >
       {children}

@@ -6,18 +6,18 @@ import LoadingSpinner from "./LoadingSpinner";
 import Welcome from "./Welcome";
 
 const PostList = () => {
-  const { postList, fetchAllPost } = useContext(AllPostList);
-  const [fetching, setFetching] = useState(false);
-
-  useEffect(() => {
-    setFetching(true);
-    fetch("https://dummyjson.com/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        fetchAllPost(data.posts);
-        setFetching(false);
-      });
-  }, []);
+  const { postList, fetching } = useContext(AllPostList);
+  // const [fetching, setFetching] = useState(false);
+  // this code trafser in the store
+  // useEffect(() => {
+  //   setFetching(true);
+  //   fetch("https://dummyjson.com/posts")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       fetchAllPost(data.posts);
+  //       setFetching(false);
+  //     });
+  // }, []);
   return (
     <>
       {fetching && <LoadingSpinner />}{" "}
