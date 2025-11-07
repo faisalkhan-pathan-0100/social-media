@@ -3,13 +3,14 @@ import { AllPostList } from "../store/post-list-store";
 
 const CreatePost = () => {
   const postContext = useContext(AllPostList);
+
   const [post, setPost] = useState({
     id: 10,
     title: "",
     description: "",
-    reaction: 20,
+    reaction: "",
     tags: [],
-    userId: 10,
+    userId: "",
   });
   const postSubmitHandler = (e) => {
     e.preventDefault();
@@ -57,6 +58,28 @@ const CreatePost = () => {
             className="form-control"
             id="hashtags"
             onChange={(e) => setPost({ ...post, tags: e.target.value })}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="userId" className="form-label">
+            User Id
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="userId"
+            onChange={(e) => setPost({ ...post, userId: e.target.value })}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="reaction" className="form-label">
+            Recation
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="reaction"
+            onChange={(e) => setPost({ ...post, reaction: e.target.value })}
           />
         </div>
         <div className="mb-3 form-check"></div>

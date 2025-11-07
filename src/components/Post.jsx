@@ -1,12 +1,27 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FcLike } from "react-icons/fc";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { AllPostList } from "../store/post-list-store";
+import { BiLike, BiSolidLike } from "react-icons/bi";
+
 const Post = ({ post }) => {
   const context = useContext(AllPostList);
-  console.log(context);
+  const [like, setLike] = useState(false);
+  let [reaction, setReaction] = useState(post.reaction);
+  console.log(reaction);
+
   const deletePostHandler = () => {
     context.deletepost(post.id);
+  };
+
+  const likeHandler = () => {
+    if (like === false) {
+      setLike(true);
+      setReaction((prev) => prev + 1);
+    } else if (like === true) {
+      setLike(false);
+      setReaction((prev) => prev - 1);
+    }
   };
   return (
     <div className="card" style={{ width: "30rem", margin: "15px" }}>
@@ -22,20 +37,44 @@ const Post = ({ post }) => {
         </h5>
         <p className="card-text">{post.description}</p>
         <span>
-          <FcLike
+          {/* <FcLike
             style={{
               fontSize: "25px",
               marginBottom: "5px",
               marginRight: "5px",
             }}
-          />
-          {post.reaction} <br></br>
+          /> */}
+          {like === true ? (
+            <BiSolidLike
+              style={{
+                fontSize: "25px",
+                marginBottom: "5px",
+                marginRight: "5px",
+                color: "red",
+              }}
+              onClick={likeHandler}
+            />
+          ) : (
+            <BiLike
+              style={{
+                fontSize: "25px",
+                marginBottom: "5px",
+                marginRight: "5px",
+              }}
+              onClick={likeHandler}
+            />
+          )}
+          {reaction} <br></br>
           {post.tags.map((tag) => (
-            <span className="badge text-bg-primary tag">{tag}</span>
+            <span className="badge text-bg-primary tag p-2">{tag}</span>
           ))}
         </span>
         <br></br>
-        <button type="button" className="btn btn-warning ">
+        <button
+          type="button"
+          className="btn btn-warning "
+          onClick={likeHandler}
+        >
           Like
         </button>
       </div>
