@@ -18,3 +18,13 @@
     margin-right:3px;
     margin-bottom:5px;
 }
+
+.no_post_msg{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.loader{
+    margin-top:200px;
+}

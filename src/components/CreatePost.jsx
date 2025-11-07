@@ -7,7 +7,7 @@ const CreatePost = () => {
   const [post, setPost] = useState({
     id: 10,
     title: "",
-    description: "",
+    body: "",
     reaction: "",
     tags: [],
     userId: "",
@@ -17,7 +17,7 @@ const CreatePost = () => {
     postContext.createNewPost(
       post.id,
       post.title,
-      post.description,
+      post.body,
       post.reaction,
       post.tags,
       post.userId
@@ -39,14 +39,14 @@ const CreatePost = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
+          <label htmlFor="body" className="form-label">
+            body
           </label>
           <input
             type="text"
             className="form-control"
-            id="description"
-            onChange={(e) => setPost({ ...post, description: e.target.value })}
+            id="body"
+            onChange={(e) => setPost({ ...post, body: e.target.value })}
           />
         </div>
         <div className="mb-3">

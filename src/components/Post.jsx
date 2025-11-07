@@ -5,10 +5,11 @@ import { AllPostList } from "../store/post-list-store";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 
 const Post = ({ post }) => {
+  // console.log(post);
   const context = useContext(AllPostList);
   const [like, setLike] = useState(false);
   let [reaction, setReaction] = useState(post.reaction);
-  console.log(reaction);
+  // console.log(reaction);
 
   const deletePostHandler = () => {
     context.deletepost(post.id);
@@ -35,7 +36,7 @@ const Post = ({ post }) => {
             <RiDeleteBinLine />
           </span>
         </h5>
-        <p className="card-text">{post.description}</p>
+        <p className="card-text">{post.body}</p>
         <span>
           {/* <FcLike
             style={{
